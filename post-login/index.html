@@ -48,7 +48,7 @@
       top:-50px;
       font-size:24px;
       animation: fall linear forwards;
-      z-index:1;
+      z-index:10; /* raised so it appears above background */
     }
     @keyframes fall{
       to{transform:translateY(110vh); opacity:0;}
@@ -66,4 +66,18 @@
   <script>
     const emojis = ["🌹","💐","💟","❤️","🌸","🌺"];
     function createFalling(){
-      const el = docum
+      const el = document.createElement("div");
+      el.className = "falling";
+      el.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.left = Math.random()*100 + "vw";
+      el.style.animationDuration = (3+Math.random()*5)+"s";
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),8000);
+    }
+
+    function startFall(){
+      setInterval(createFalling, 300);
+    }
+  </script>
+</body>
+</html>
